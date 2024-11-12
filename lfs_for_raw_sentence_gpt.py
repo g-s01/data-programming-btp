@@ -76,7 +76,7 @@ def label_sentence_Person_OtherPER(tokens):
             else:
                 labels.append(ABSTAIN)
         else:
-            labels.append('ABSTAIN') 
+            labels.append(ABSTAIN) 
 
     return labels
 
