@@ -106,9 +106,10 @@ def label_sentence_Person_SportsManager(tokens):
 
         # Check if the current token is associated with a sports manager based on context
         if (
-            token_lower in sports_manager_titles or  # The token itself is a title
+            token_lower in sports_manager_titles and (  # The token itself is a title
             (i > 0 and tokens[i - 1].lower() in sports_manager_titles) or  # Preceded by a sports title
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_manager_titles)  # Followed by a sports title
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_manager_titles)
+            )  # Followed by a sports title
         ):
             # Ensure it is related to a sports context
             if (
@@ -150,9 +151,9 @@ def label_sentence_Person_Cleric(tokens):
 
         # Check if the token matches known clerical titles
         if (
-            token_lower in cleric_titles or  # The token itself is a clerical title
-            (i > 0 and tokens[i - 1].lower() in cleric_titles) or  # Preceded by a clerical title
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in cleric_titles)  # Followed by a clerical title
+            token_lower in cleric_titles and  # The token itself is a clerical title
+            ((i > 0 and tokens[i - 1].lower() in cleric_titles) or  # Preceded by a clerical title
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in cleric_titles))  # Followed by a clerical title
         ):
             labels.append(Person_Cleric)
         # Check if the context suggests a clerical role
@@ -194,9 +195,9 @@ def label_sentence_Person_Politician(tokens):
 
         # Check if the token matches known political titles
         if (
-            token_lower in politician_titles or  # The token itself is a political title
+            token_lower in politician_titles and(  # The token itself is a political title
             (i > 0 and tokens[i - 1].lower() in politician_titles) or  # Preceded by a political title
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in politician_titles)  # Followed by a political title
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in politician_titles))  # Followed by a political title
         ):
             labels.append(Person_Politician)
         # Check if the context suggests a political role
@@ -243,11 +244,11 @@ def label_sentence_Person_Athelete(tokens):
 
         # Check if the token or surrounding tokens suggest an athlete
         if (
-            token_lower in athlete_indicators or  # The token itself indicates an athlete
+            token_lower in athlete_indicators and (  # The token itself indicates an athlete
             (i > 0 and tokens[i - 1].lower() in athlete_indicators) or  # Preceded by an indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in athlete_indicators) or  # Followed by an indicator
             (i > 0 and tokens[i - 1].lower() in sports_context) or  # Preceded by a sports context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_context)  # Followed by a sports context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_context))  # Followed by a sports context keyword
         ):
             labels.append(Person_Athlete)
         else:
@@ -289,11 +290,11 @@ def label_sentence_Person_Artist(tokens):
 
         # Check if the token or surrounding tokens suggest an artist
         if (
-            token_lower in artist_indicators or  # The token itself indicates an artist role
+            token_lower in artist_indicators and (  # The token itself indicates an artist role
             (i > 0 and tokens[i - 1].lower() in artist_indicators) or  # Preceded by an artist role
             (i < len(tokens) - 1 and tokens[i + 1].lower() in artist_indicators) or  # Followed by an artist role
             (i > 0 and tokens[i - 1].lower() in artistic_context) or  # Preceded by an artistic context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in artistic_context)  # Followed by an artistic context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in artistic_context))  # Followed by an artistic context keyword
         ):
             labels.append(Person_Artist)
         else:
@@ -332,11 +333,11 @@ def label_sentence_Person_Scientist(tokens):
 
         # Check if the token or surrounding tokens suggest a scientist
         if (
-            token_lower in scientist_indicators or  # The token itself indicates a scientist role
+            token_lower in scientist_indicators and (  # The token itself indicates a scientist role
             (i > 0 and tokens[i - 1].lower() in scientist_indicators) or  # Preceded by a scientist role
             (i < len(tokens) - 1 and tokens[i + 1].lower() in scientist_indicators) or  # Followed by a scientist role
             (i > 0 and tokens[i - 1].lower() in scientific_context) or  # Preceded by a scientific context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in scientific_context)  # Followed by a scientific context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in scientific_context))  # Followed by a scientific context keyword
         ):
             labels.append(Person_Scientist)
         else:
@@ -374,11 +375,11 @@ def label_sentence_Medical_Disease(tokens):
 
         # Check if the token or surrounding tokens suggest a disease
         if (
-            token_lower in disease_indicators or  # The token itself indicates a disease
+            token_lower in disease_indicators and (  # The token itself indicates a disease
             (i > 0 and tokens[i - 1].lower() in disease_indicators) or  # Preceded by a disease indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in disease_indicators) or  # Followed by a disease indicator
             (i > 0 and tokens[i - 1].lower() in medical_context) or  # Preceded by a medical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context)  # Followed by a medical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context))  # Followed by a medical context keyword
         ):
             labels.append(MEDICAL_DISEASE)
         else:
@@ -417,11 +418,11 @@ def label_sentence_Medical_Symptom(tokens):
 
         # Check if the token or surrounding tokens suggest a symptom
         if (
-            token_lower in symptom_indicators or  # The token itself indicates a symptom
+            token_lower in symptom_indicators and (  # The token itself indicates a symptom
             (i > 0 and tokens[i - 1].lower() in symptom_indicators) or  # Preceded by a symptom indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in symptom_indicators) or  # Followed by a symptom indicator
             (i > 0 and tokens[i - 1].lower() in medical_context) or  # Preceded by a medical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context)  # Followed by a medical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context))  # Followed by a medical context keyword
         ):
             labels.append(Medical_Symptom)
         else:
@@ -463,11 +464,11 @@ def label_sentence_Medical_AnatomicalStructure(tokens):
 
         # Check if the token or surrounding tokens suggest an anatomical structure
         if (
-            token_lower in anatomical_indicators or  # The token itself indicates an anatomical structure
+            token_lower in anatomical_indicators and (  # The token itself indicates an anatomical structure
             (i > 0 and tokens[i - 1].lower() in anatomical_indicators) or  # Preceded by an anatomical indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in anatomical_indicators) or  # Followed by an anatomical indicator
             (i > 0 and tokens[i - 1].lower() in medical_context) or  # Preceded by a medical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context)  # Followed by a medical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context))  # Followed by a medical context keyword
         ):
             labels.append(Medical_AnatomicalStructure)
         else:
@@ -506,11 +507,11 @@ def label_sentence_Medical_Medical_Procedure(tokens):
 
         # Check if the token or surrounding tokens suggest a medical procedure
         if (
-            token_lower in medical_procedure_indicators or  # The token itself indicates a medical procedure
+            token_lower in medical_procedure_indicators and (  # The token itself indicates a medical procedure
             (i > 0 and tokens[i - 1].lower() in medical_procedure_indicators) or  # Preceded by a procedure indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_procedure_indicators) or  # Followed by a procedure indicator
             (i > 0 and tokens[i - 1].lower() in medical_context) or  # Preceded by a medical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context)  # Followed by a medical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context))  # Followed by a medical context keyword
         ):
             labels.append(Medical_MedicalProcedure)
         else:
@@ -550,11 +551,11 @@ def label_sentence_Medical_Medication_Vaccince(tokens):
 
         # Check if the token or surrounding tokens suggest medication or a vaccine
         if (
-            token_lower in medication_vaccine_indicators or  # The token itself indicates a medication or vaccine
+            token_lower in medication_vaccine_indicators and ( # The token itself indicates a medication or vaccine
             (i > 0 and tokens[i - 1].lower() in medication_vaccine_indicators) or  # Preceded by a medication indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in medication_vaccine_indicators) or  # Followed by a medication indicator
             (i > 0 and tokens[i - 1].lower() in medical_context) or  # Preceded by a medical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context)  # Followed by a medical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in medical_context))  # Followed by a medical context keyword
         ):
             labels.append(MEDICAL_MEDICATION_VACCINE)
         else:
@@ -591,11 +592,11 @@ def label_sentence_Product_OtherPROD(tokens):
 
         # Check if the token or surrounding tokens suggest a product
         if (
-            token_lower in other_prod_indicators or  # The token itself indicates a product
+            token_lower in other_prod_indicators and (  # The token itself indicates a product
             (i > 0 and tokens[i - 1].lower() in other_prod_indicators) or  # Preceded by a product indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in other_prod_indicators) or  # Followed by a product indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a product context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a product context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a product context keyword
         ):
             labels.append(Product_OtherPROD)
         else:
@@ -634,11 +635,11 @@ def label_sentence_Product_Drink(tokens):
 
         # Check if the token or surrounding tokens suggest a drink
         if (
-            token_lower in drink_indicators or  # The token itself indicates a drink
+            token_lower in drink_indicators and (  # The token itself indicates a drink
             (i > 0 and tokens[i - 1].lower() in drink_indicators) or  # Preceded by a drink indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in drink_indicators) or  # Followed by a drink indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a drink context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a drink context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a drink context keyword
         ):
             labels.append(Product_Drink)
         else:
@@ -677,11 +678,11 @@ def label_sentence_Product_Food(tokens):
 
         # Check if the token or surrounding tokens suggest food
         if (
-            token_lower in food_indicators or  # The token itself indicates food
+            token_lower in food_indicators and (  # The token itself indicates food
             (i > 0 and tokens[i - 1].lower() in food_indicators) or  # Preceded by a food indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in food_indicators) or  # Followed by a food indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a food context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a food context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a food context keyword
         ):
             labels.append(Product_Food)
         else:
@@ -719,11 +720,11 @@ def label_sentence_Product_Vehicle(tokens):
 
         # Check if the token or surrounding tokens suggest a vehicle
         if (
-            token_lower in vehicle_indicators or  # The token itself indicates a vehicle
+            token_lower in vehicle_indicators and (  # The token itself indicates a vehicle
             (i > 0 and tokens[i - 1].lower() in vehicle_indicators) or  # Preceded by a vehicle indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in vehicle_indicators) or  # Followed by a vehicle indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a vehicle context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a vehicle context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a vehicle context keyword
         ):
             labels.append(Product_Vehicle)
         else:
@@ -761,11 +762,11 @@ def label_sentence_Product_Clothing(tokens):
 
         # Check if the token or surrounding tokens suggest clothing
         if (
-            token_lower in clothing_indicators or  # The token itself indicates clothing
+            token_lower in clothing_indicators and (  # The token itself indicates clothing
             (i > 0 and tokens[i - 1].lower() in clothing_indicators) or  # Preceded by a clothing indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in clothing_indicators) or  # Followed by a clothing indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a clothing context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a clothing context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a clothing context keyword
         ):
             labels.append(Product_Clothing)
         else:
@@ -804,11 +805,11 @@ def label_sentence_Group_ORG(tokens):
 
         # Check if the token or surrounding tokens suggest an organization
         if (
-            token_lower in org_indicators or  # The token itself indicates an organization
+            token_lower in org_indicators and ( # The token itself indicates an organization
             (i > 0 and tokens[i - 1].lower() in org_indicators) or  # Preceded by an organization indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in org_indicators) or  # Followed by an organization indicator
             (i > 0 and tokens[i - 1].lower() in org_context) or  # Preceded by an organization context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in org_context)  # Followed by an organization context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in org_context))  # Followed by an organization context keyword
         ):
             labels.append(Group_ORG)
         else:
@@ -847,11 +848,11 @@ def label_sentence_Group_CarManufacturer(tokens):
 
         # Check if the token or surrounding tokens suggest a car manufacturer
         if (
-            token_lower in car_manufacturer_indicators or  # The token itself indicates a car manufacturer
+            token_lower in car_manufacturer_indicators and (  # The token itself indicates a car manufacturer
             (i > 0 and tokens[i - 1].lower() in car_manufacturer_indicators) or  # Preceded by a car manufacturer
             (i < len(tokens) - 1 and tokens[i + 1].lower() in car_manufacturer_indicators) or  # Followed by a car manufacturer
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a car context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a car context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a car context keyword
         ):
             labels.append(Group_CarManufacturer)
         else:
@@ -892,12 +893,12 @@ def label_sentence_Group_SportsGRP(tokens):
 
         # Check if the token or surrounding tokens suggest a sports group
         if (
-            token_lower in sports_grp_indicators or  # The token itself indicates a sports group
+            token_lower in sports_grp_indicators and (  # The token itself indicates a sports group
             token_lower in sports_teams or  # Specific team names
             (i > 0 and tokens[i - 1].lower() in sports_grp_indicators) or  # Preceded by a sports group indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_grp_indicators) or  # Followed by a sports group indicator
             (i > 0 and tokens[i - 1].lower() in sports_context) or  # Preceded by a sports context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_context)  # Followed by a sports context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in sports_context))  # Followed by a sports context keyword
         ):
             labels.append(Group_SportsGRP)
         else:
@@ -935,11 +936,11 @@ def label_sentence_Group_AerospaceManufacturer(tokens):
 
         # Check if the token or surrounding tokens suggest an aerospace manufacturer
         if (
-            token_lower in aerospace_indicators or  # The token itself indicates an aerospace manufacturer
+            token_lower in aerospace_indicators and (  # The token itself indicates an aerospace manufacturer
             (i > 0 and tokens[i - 1].lower() in aerospace_indicators) or  # Preceded by an aerospace manufacturer indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in aerospace_indicators) or  # Followed by an aerospace manufacturer indicator
             (i > 0 and tokens[i - 1].lower() in product_context) or  # Preceded by a product context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context)  # Followed by a product context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in product_context))  # Followed by a product context keyword
         ):
             labels.append(Group_AeroSpaceManufacturer)
         else:
@@ -978,12 +979,12 @@ def label_sentence_CreativeWorks_Software(tokens):
 
         # Check if the token or surrounding tokens suggest software
         if (
-            token_lower in software_indicators or  # The token itself indicates software
+            token_lower in software_indicators and (  # The token itself indicates software
 #            token_lower in software_names or  # Specific software names
             (i > 0 and tokens[i - 1].lower() in software_indicators) or  # Preceded by a software indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in software_indicators) or  # Followed by a software indicator
             (i > 0 and tokens[i - 1].lower() in software_context) or  # Preceded by a software context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in software_context)  # Followed by a software context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in software_context))  # Followed by a software context keyword
         ):
             labels.append(CreativeWorks_Software)
         else:
@@ -1023,12 +1024,12 @@ def label_sentence_CreativeWorks_ArtWork(tokens):
 
         # Check if the token or surrounding tokens suggest an artwork
         if (
-            token_lower in artwork_indicators or  # The token itself indicates an artwork
+            token_lower in artwork_indicators and (  # The token itself indicates an artwork
             token_lower in artwork_titles or  # Specific artwork titles
             (i > 0 and tokens[i - 1].lower() in artwork_indicators) or  # Preceded by an artwork indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in artwork_indicators) or  # Followed by an artwork indicator
             (i > 0 and tokens[i - 1].lower() in artwork_context) or  # Preceded by an artwork context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in artwork_context)  # Followed by an artwork context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in artwork_context))  # Followed by an artwork context keyword
         ):
             labels.append(CreativeWorks_ArtWork)
         else:
@@ -1069,12 +1070,12 @@ def label_sentence_CreativeWorks_WrittenWork(tokens):
 
         # Check if the token or surrounding tokens suggest a written work
         if (
-            token_lower in written_work_indicators or  # The token itself indicates a written work
+            token_lower in written_work_indicators and (  # The token itself indicates a written work
             token_lower in written_work_titles or  # Specific written work titles
             (i > 0 and tokens[i - 1].lower() in written_work_indicators) or  # Preceded by a written work indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in written_work_indicators) or  # Followed by a written work indicator
             (i > 0 and tokens[i - 1].lower() in written_work_context) or  # Preceded by a written work context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in written_work_context)  # Followed by a written work context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in written_work_context))  # Followed by a written work context keyword
         ):
             labels.append(CreativeWorks_WrittenWork)
         else:
@@ -1117,12 +1118,12 @@ def label_sentence_CreativeWorks_MusicalWork(tokens):
 
         # Check if the token or surrounding tokens suggest a musical work
         if (
-            token_lower in musical_work_indicators or  # The token itself indicates a musical work
+            token_lower in musical_work_indicators and (  # The token itself indicates a musical work
             token_lower in musical_work_titles or  # Specific musical work titles
             (i > 0 and tokens[i - 1].lower() in musical_work_indicators) or  # Preceded by a musical work indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in musical_work_indicators) or  # Followed by a musical work indicator
             (i > 0 and tokens[i - 1].lower() in musical_context) or  # Preceded by a musical context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in musical_context)  # Followed by a musical context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in musical_context))  # Followed by a musical context keyword
         ):
             labels.append(CreativeWorks_MusicalWork)
         else:
@@ -1166,12 +1167,12 @@ def label_sentence_CreativeWorks_VisualWork(tokens):
 
         # Check if the token or surrounding tokens suggest a visual work
         if (
-            token_lower in visual_work_indicators or  # The token itself indicates a visual work
+            token_lower in visual_work_indicators and (  # The token itself indicates a visual work
             token_lower in visual_work_titles or  # Specific visual work titles
             (i > 0 and tokens[i - 1].lower() in visual_work_indicators) or  # Preceded by a visual work indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in visual_work_indicators) or  # Followed by a visual work indicator
             (i > 0 and tokens[i - 1].lower() in visual_context) or  # Preceded by a visual context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in visual_context)  # Followed by a visual context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in visual_context))  # Followed by a visual context keyword
         ):
             labels.append(CreativeWorks_VisualWork)
         else:
@@ -1212,12 +1213,12 @@ def label_sentence_Location_Station(tokens):
 
         # Check if the token or surrounding tokens suggest a station
         if (
-            token_lower in station_indicators or  # The token itself indicates a station
+            token_lower in station_indicators and (  # The token itself indicates a station
             token_lower in station_names or  # Specific station names
             (i > 0 and tokens[i - 1].lower() in station_indicators) or  # Preceded by a station indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in station_indicators) or  # Followed by a station indicator
             (i > 0 and tokens[i - 1].lower() in station_context) or  # Preceded by a station context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in station_context)  # Followed by a station context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in station_context))  # Followed by a station context keyword
         ):
             labels.append(Location_Station)
         else:
@@ -1254,12 +1255,12 @@ def label_sentence_Location_HumanSettlement(tokens):
 
         # Check if the token or surrounding tokens suggest a human settlement
         if (
-            token_lower in settlement_indicators or  # The token itself indicates a settlement
+            token_lower in settlement_indicators and (  # The token itself indicates a settlement
             token_lower in known_settlement_names or  # Specific known settlement names
             (i > 0 and tokens[i - 1].lower() in settlement_indicators) or  # Preceded by a settlement indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in settlement_indicators) or  # Followed by a settlement indicator
             (i > 0 and tokens[i - 1].lower() in settlement_context) or  # Preceded by a settlement context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in settlement_context)  # Followed by a settlement context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in settlement_context))  # Followed by a settlement context keyword
         ):
             labels.append(Location_HumanSettlement)
         else:
@@ -1298,12 +1299,12 @@ def label_sentence_Location_OtherLOC(tokens):
 
         # Check if the token or surrounding tokens suggest an other location
         if (
-            token_lower in other_loc_indicators or  # The token itself indicates a non-settlement location
+            token_lower in other_loc_indicators and (  # The token itself indicates a non-settlement location
             token_lower in known_other_loc_names or  # Specific non-settlement location names
             (i > 0 and tokens[i - 1].lower() in other_loc_indicators) or  # Preceded by a non-settlement location indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in other_loc_indicators) or  # Followed by a non-settlement location indicator
             (i > 0 and tokens[i - 1].lower() in other_loc_context) or  # Preceded by a non-settlement location context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in other_loc_context)  # Followed by a non-settlement location context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in other_loc_context))  # Followed by a non-settlement location context keyword
         ):
             labels.append(Location_OtherLOC)
         else:
@@ -1342,12 +1343,12 @@ def label_sentence_Location_Facility(tokens):
 
         # Check if the token or surrounding tokens suggest a facility
         if (
-            token_lower in facility_indicators or  # The token itself indicates a facility
+            token_lower in facility_indicators and (  # The token itself indicates a facility
             token_lower in known_facility_names or  # Specific facility names
             (i > 0 and tokens[i - 1].lower() in facility_indicators) or  # Preceded by a facility indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in facility_indicators) or  # Followed by a facility indicator
             (i > 0 and tokens[i - 1].lower() in facility_context) or  # Preceded by a facility context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in facility_context)  # Followed by a facility context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in facility_context))  # Followed by a facility context keyword
         ):
             labels.append(Location_Facility)
         else:
@@ -1387,12 +1388,12 @@ def label_sentence_Group_PrivateCorp(tokens):
 
         # Check if the token or surrounding tokens suggest a private corporation
         if (
-            token_lower in private_corp_indicators or  # The token itself indicates a private corporation
+            token_lower in private_corp_indicators and (  # The token itself indicates a private corporation
             token_lower in known_private_corp_names or  # Specific private corporation names
             (i > 0 and tokens[i - 1].lower() in private_corp_indicators) or  # Preceded by a private corporation indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in private_corp_indicators) or  # Followed by a private corporation indicator
             (i > 0 and tokens[i - 1].lower() in private_corp_context) or  # Preceded by a private corporation context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in private_corp_context)  # Followed by a private corporation context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in private_corp_context))  # Followed by a private corporation context keyword
         ):
             labels.append(Group_PrivateCorp)
         else:
@@ -1432,12 +1433,12 @@ def label_sentence_Group_PublicCorp(tokens):
 
         # Check if the token or surrounding tokens suggest a public corporation
         if (
-            token_lower in public_corp_indicators or  # The token itself indicates a public corporation
+            token_lower in public_corp_indicators and (  # The token itself indicates a public corporation
             token_lower in known_public_corp_names or  # Specific public corporation names
             (i > 0 and tokens[i - 1].lower() in public_corp_indicators) or  # Preceded by a public corporation indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in public_corp_indicators) or  # Followed by a public corporation indicator
             (i > 0 and tokens[i - 1].lower() in public_corp_context) or  # Preceded by a public corporation context keyword
-            (i < len(tokens) - 1 and tokens[i + 1].lower() in public_corp_context)  # Followed by a public corporation context keyword
+            (i < len(tokens) - 1 and tokens[i + 1].lower() in public_corp_context))  # Followed by a public corporation context keyword
         ):
             labels.append(Group_PublicCorp)
         else:
