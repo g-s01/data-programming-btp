@@ -979,7 +979,7 @@ def label_sentence_CreativeWorks_Software(tokens):
         # Check if the token or surrounding tokens suggest software
         if (
             token_lower in software_indicators or  # The token itself indicates software
-            token_lower in software_names or  # Specific software names
+#            token_lower in software_names or  # Specific software names
             (i > 0 and tokens[i - 1].lower() in software_indicators) or  # Preceded by a software indicator
             (i < len(tokens) - 1 and tokens[i + 1].lower() in software_indicators) or  # Followed by a software indicator
             (i > 0 and tokens[i - 1].lower() in software_context) or  # Preceded by a software context keyword
