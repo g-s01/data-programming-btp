@@ -958,19 +958,17 @@ def label_sentence_CreativeWorks_Software(tokens):
     Returns:
     list of str - A list of labels for each token.
     """
-    # Common software and video game indicators
     software_indicators = {
-        'software', 'program', 'app', 'application', 'system', 'platform', 'game', 'editor',
-        'tool', 'suite', 'framework', 'os', 'extension', 'plugin'
-    }
-    software_names = {
-        'lego', 'batman', 'super', 'mario', 'resident', 'evil', 'mycroft', 'sherlock', 'infocom',
-        'hypertext', 'hes', 'windows', 'linux', 'android', 'ios', 'photoshop', 'excel', 'word',
-        'powerpoint', 'blender', 'mycroft'
+        'hypertext', 'lego', 'batman', 'dc', 'super', 'heroes', 'resident', 'evil', 'nemesis',
+        'mario', 'mycroft', 'infocom', 'sherlock', 'hes', 'excel', 'photoshop', 'word',
+        'powerpoint', 'autocad', 'blender', 'gimp', 'slack', 'notepad++', 'vim', 'sublime',
+        'atom', 'mysql', 'postgresql', 'oracle', 'firefox', 'chrome', 'safari', 'internet',
+        'explorer', 'outlook', 'thunderbird', 'skype', 'teams', 'zoom', 'discord', 'trello',
+        'asana', 'jira', 'confluence', 'unity', 'unreal', 'godot', 'tiktok', 'snapchat'
     }
     software_context = {
-        'released', 'developed', 'version', 'update', 'edition', 'install', 'open-source',
-        'unlockable', 'bonus', 'features', 'game', 'play', 'programmed', 'virtual'
+        'game', 'program', 'app', 'application', 'software', 'tool', 'platform', 'developed',
+        'released', 'published', 'version', 'update', 'patch', 'module'
     }
 
     labels = []
@@ -1096,17 +1094,20 @@ def label_sentence_CreativeWorks_MusicalWork(tokens):
     list of str - A list of labels for each token.
     """
     # Common musical work indicators
-    musical_work_indicators = {
-        'song', 'composition', 'piece', 'melody', 'track', 'album', 'soundtrack', 'opera', 'symphony',
-        'cantata', 'concerto', 'aria', 'hymn', 'anthem', 'tune', 'suite', 'rhapsody', 'overture', 'ballad'
-    }
     musical_work_titles = {
-        'strange', 'fruit', 'les', 'martyrs', 'the', 'man', 'i', 'love', 'bewitched', 'bothered',
-        'and', 'bewildered', 'till', 'eulenspiegel', 'merry', 'pranks', 'gurre-lieder'
+        'song', 'album', 'composition', 'concerto', 'opera', 'symphony', 'cantata', 'sonata',
+        'ballad', 'anthem', 'aria', 'suite', 'overture', 'march', 'nocturne', 'waltz', 'rhapsody',
+        'scherzo', 'fugue', 'prelude', 'toccata', 'fantasia', 'carol', 'melody', 'tune', 'score',
+        'piece', 'chorale', 'oratorio', 'track'
+    }
+    musical_work_indicators = {
+        'vocals', 'lyrics', 'album', 'track', 'composition', 'song', 'anthem', 'aria', 'march',
+        'nocturne', 'overture', 'suite', 'symphony', 'ballad', 'piece', 'melody', 'chorale', 'score',
+        'opera', 'cantata', 'concert', 'music', 'recording', 'version', 'oratorio', 'prelude'
     }
     musical_context = {
-        'performed', 'written', 'composed', 'sung', 'played', 'recorded', 'covered', 'vocals', 'soundtrack',
-        'album', 'lyrics', 'featuring', 'conducting', 'arranged', 'directing', 'released', 'classic'
+        'written', 'performed', 'sings', 'composed', 'featuring', 'includes', 'from', 'in', 'recorded',
+        'covered', 'released', 'soundtrack', 'album', 'single', 'track'
     }
 
     labels = []
@@ -1141,17 +1142,21 @@ def label_sentence_CreativeWorks_VisualWork(tokens):
     list of str - A list of labels for each token.
     """
     # Common visual work indicators
-    visual_work_indicators = {
-        'film', 'movie', 'series', 'show', 'documentary', 'animation', 'short', 'episode',
-        'miniseries', 'special', 'broadcast', 'drama', 'sitcom', 'production'
-    }
     visual_work_titles = {
-        'good', 'eats', 'rincón', 'de', 'luz', 'sportscenter', 'cbs', 'this', 'morning', 'baseball', 'tonight',
-        'lady', 'in', 'the', 'dark'
+        'film', 'movie', 'show', 'series', 'episode', 'documentary', 'animation', 'cartoon',
+        'drama', 'sitcom', 'miniseries', 'special', 'feature', 'broadcast', 'clip', 'segment',
+        'presentation', 'program', 'television', 'cinema', 'picture', 'trailer', 'screenplay',
+        'adaptation', 'biopic', 'production', 'episode', 'story', 'play', 'performance', 'skit',
+        'short', 'commercial', 'broadcast', 'video', 'scene'
+    }
+    visual_work_indicators = {
+        'art', 'direction', 'show', 'film', 'movie', 'series', 'television', 'documentary',
+        'production', 'program', 'feature', 'performance', 'screen', 'animation', 'episode',
+        'special', 'broadcast', 'clip', 'scene', 'play', 'adaptation', 'biopic', 'picture'
     }
     visual_context = {
-        'starring', 'cast', 'filmed', 'broadcasted', 'aired', 'featured', 'directed', 'produced', 'remade',
-        'premiere', 'screened', 'television', 'presented', 'hosted', 'anchor', 'theme', 'show', 'channel'
+        'released', 'aired', 'starring', 'featuring', 'broadcasted', 'produced', 'directed',
+        'acted', 'co-anchored', 'cast', 'remade', 'screened', 'presented'
     }
 
     labels = []
@@ -1186,15 +1191,18 @@ def label_sentence_Location_Station(tokens):
     list of str - A list of labels for each token.
     """
     # Common station indicators
-    station_indicators = {
-        'station', 'platform', 'terminal', 'stop', 'hub', 'depot'
-    }
     station_names = {
-        'newark', 'broad', 'street', 'helsfyr', 'fairview–pointe-claire'
+        'station', 'terminus', 'platform', 'depot', 'junction', 'hub', 'terminal', 'interchange',
+        'bay', 'halt', 'stop', 'yard', 'subway', 'metro', 'express', 'branch', 'railway', 'track',
+        'pier', 'loop', 'crossing', 'depot', 'port'
+    }
+    station_indicators = {
+        'station', 'terminal', 'stop', 'depot', 'platform', 'track', 'yard', 'junction', 'hub',
+        'express', 'route', 'pier', 'crossing', 'subway', 'metro'
     }
     station_context = {
-        'rail', 'metro', 'light', 'express', 'train', 'tram', 'underground', 'subway', 'service',
-        'transit', 'served', 'connected', 'near', 'next', 'branch'
+        'served', 'located', 'construction', 'branch', 'line', 'connected', 'route', 'service',
+        'built', 'used', 'transit', 'rail', 'transportation', 'trains', 'operating', 'near'
     }
 
     labels = []
@@ -1409,7 +1417,7 @@ def label_sentence_Group_PublicCorp(tokens):
     }
     known_public_corp_names = {
         'ecopetrol', 'john', 'deere', 'jr', 'east', 'oricon', 'cumulus', 'media', 'vf', 'disney',
-        'commonwealth', 'banking', 'ping', 'an', 'insurance', 'costco', 'hewlett-packard', 'marks',
+        'commonwealth', 'banking', 'ping', 'insurance', 'costco', 'hewlett-packard', 'marks',
         'spencer', 'morgan', 'stanley'
     }
     public_corp_context = {
